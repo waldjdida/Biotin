@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Add new person</h2>
+<mat-dialog-content class="mat-typography">
+  
+  <div>
+    <form class="form" [formGroup]="form">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Organisation</mat-label>
+        <mat-select formControlName="organisationId">
+          <mat-option *ngFor="let food of orgs" [value]="food.id">
+            {{food.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+
+      <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First name" type="text" formControlName="firstName" autocomplete="off">
+      </mat-form-field>
+    
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput placeholder="Last name" type="text" formControlName="lastName" autocomplete="off">
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Add person</button>
+</mat-dialog-actions>

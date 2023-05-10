@@ -1,0 +1,49 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <h1>Biotin</h1>
+        <span class="menu-spacer"></span>
+
+        <button [matMenuTriggerFor]="menu" mat-flat-button>
+            <mat-icon>person</mat-icon>
+            <span>{{((signIn | async)?.email)}}</span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span>My account</span>
+              </button>
+            <button mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Log out</span>
+            </button>
+          </mat-menu>
+
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container class="main" hasBackdrop="false">
+    <mat-sidenav #sidenav mode="side" class="main-side-nav">
+        <mat-nav-list>
+          <mat-list-item [routerLink]="'/'" routerLinkActive="active">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <span>Home</span>
+          </mat-list-item>
+            <mat-list-item [routerLink]="'/people'" routerLinkActive="active">
+                <mat-icon mat-list-icon>people</mat-icon>
+                <span>People</span>
+              </mat-list-item>
+
+              <mat-list-item [routerLink]="'/organisations'" routerLinkActive="active">
+                <mat-icon mat-list-icon>store</mat-icon>
+                <span>Organisations</span>
+              </mat-list-item>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

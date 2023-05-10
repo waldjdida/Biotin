@@ -1,0 +1,18 @@
+<div class="container">
+
+  <div class="tn-logo"><img src="assets/tn-logo.svg" /></div>
+  
+    <form class="login-form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email Address</mat-label>
+          <input matInput placeholder="Email Address" type="email" formControlName="email">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" [disabled]="!signInForm.valid">Sign in</button>
+      </form>
+</div>

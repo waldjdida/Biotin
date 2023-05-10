@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  redis-server:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - redis-server:/data
+  db-server:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    cap_add: [ 'SYS_PTRACE' ]
+    environment:
+      - "ACCEPT_EULA=1"
+      - "MSSQL_SA_PASSWORD=SU2orange!"
+      - "MSSQL_USER=SA"
+      - "MSSQL_PID=Developer"
+    ports:
+      - "1433:1433"
+    hostname: db-server
+    volumes:
+      - "mssql-azuresql-edge-data:/var/opt/db-server"
+    networks: 
+      - "db-server-net"
+volumes:
+  redis-server:
+    driver: local
+  mssql-azuresql-edge-data:
+
+networks:
+  db-server-net:
+    driver: bridge
